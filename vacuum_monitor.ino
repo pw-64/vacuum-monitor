@@ -65,7 +65,7 @@ void UpdateLEDs() {
 void setup() {
   Serial.begin(9600);
   delay(delayTime);
-  print("Starting");
+  Serial.println("Starting");
   delay(delayTime);
   Serial.println("Initialising Vacuum Level LEDs");
   pinMode(led_1_pin, OUTPUT);
