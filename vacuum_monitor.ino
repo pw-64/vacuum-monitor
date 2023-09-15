@@ -33,7 +33,6 @@ bool led_10_on = LOW;
 int vacuumSensorValue; // create a blank variable to hold the value from the Vacuum Sensor Pin that can be assigned a value later
 
 bool inRange(int minimum, int value, int maximum) {return ((value >= minimum) && (value < maximum));} // return a boolean if a value is within a range
-void print(char message[]) {if (debugOutput == true) {Serial.println(message);}} // print a message to the serial monitor
 
 void SetAllLEDs(bool state) {
   led_1_on = state;
@@ -68,7 +67,7 @@ void setup() {
   delay(delayTime);
   print("Starting");
   delay(delayTime);
-  print("Initialising Vacuum Level LEDs");
+  Serial.println("Initialising Vacuum Level LEDs");
   pinMode(led_1_pin, OUTPUT);
   pinMode(led_2_pin, OUTPUT);
   pinMode(led_3_pin, OUTPUT);
@@ -84,14 +83,14 @@ void setup() {
   delay(delayTime);
   SetAllLEDs(LOW);
   delay(delayTime);
-  print("Initialising Vacuum Sensor Input");
+  Serial.println("Initialising Vacuum Sensor Input");
   pinMode(vacuumSensorPin, INPUT);
   delay(delayTime);
 }
 
 void loop() {
   vacuumSensorValue = analogRead(vacuumSensorPin);
-  print(vacuumSensorValue);
+  if (debugOutput == true) {Serial.println(vacuumSensorValue);}
   if (inRange(0,   vacuumSensorValue, 100))  {led_1_on = true;}
   if (inRange(100, vacuumSensorValue, 200))  {led_2_on = true;}
   if (inRange(200, vacuumSensorValue, 300))  {led_3_on = true;}
