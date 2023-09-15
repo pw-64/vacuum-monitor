@@ -91,16 +91,16 @@ void setup() {
 void loop() {
   vacuumSensorValue = analogRead(vacuumSensorPin);
   if (debugOutput == true) {Serial.println(vacuumSensorValue);}
-  if (inRange(0,   vacuumSensorValue, 100))  {led_1_on = true;}
-  if (inRange(100, vacuumSensorValue, 200))  {led_2_on = true;}
-  if (inRange(200, vacuumSensorValue, 300))  {led_3_on = true;}
-  if (inRange(300, vacuumSensorValue, 400))  {led_4_on = true;}
-  if (inRange(400, vacuumSensorValue, 500))  {led_5_on = true;}
-  if (inRange(500, vacuumSensorValue, 600))  {led_6_on = true;}
-  if (inRange(600, vacuumSensorValue, 700))  {led_7_on = true;}
-  if (inRange(700, vacuumSensorValue, 800))  {led_8_on = true;}
-  if (inRange(800, vacuumSensorValue, 900))  {led_9_on = true;}
-  if (inRange(900, vacuumSensorValue, 1023)) {led_10_on = true;}
+  led_1_on = true;
+  if (inRange(280, vacuumSensorValue, 360))  {led_2_on = true;}
+  if (inRange(360, vacuumSensorValue, 440))  {led_3_on = true;}
+  if (inRange(440, vacuumSensorValue, 520))  {led_4_on = true;}
+  if (inRange(520, vacuumSensorValue, 600))  {led_5_on = true;}
+  if (inRange(600, vacuumSensorValue, 680))  {led_6_on = true;}
+  if (inRange(680, vacuumSensorValue, 760))  {led_7_on = true;}
+  if (inRange(760, vacuumSensorValue, 840))  {led_8_on = true;}
+  if (inRange(840, vacuumSensorValue, 920))  {led_9_on = true;}
+  if (inRange(920, vacuumSensorValue, 1023)) {led_10_on = true;}
   UpdateLEDs();
   delay(100);
 }
