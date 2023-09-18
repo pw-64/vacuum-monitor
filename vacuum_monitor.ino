@@ -1,24 +1,21 @@
-const int delayTime = 1500; // how long to wait between actions, 1500 (1.5 secs) is good
-
-const bool debugOutput = true; // turn output messages to the serial monitor on/off
-
-// true == HIGH
-// false == LOW
+const int delay_ms = 1000;
 
 // PINS
 const int vacuumSensorPin = A0;
-// vacuum level bar chart
-const int led_1_pin = 12;
-const int led_2_pin = 11;
-const int led_3_pin = 10;
-const int led_4_pin = 9;
-const int led_5_pin = 8;
-const int led_6_pin = 7;
-const int led_7_pin = 6;
-const int led_8_pin = 5;
-const int led_9_pin = 4;
-const int led_10_pin = 3;
+/// vacuum level bar chart
+const int led_10_pin = 12;
+const int led_9_pin = 11;
+const int led_8_pin = 10;
+const int led_7_pin = 9;
+const int led_6_pin = 8;
+const int led_5_pin = 7;
+const int led_4_pin = 6;
+const int led_3_pin = 5;
+const int led_2_pin = 4;
+const int led_1_pin = 3;
 
+// true == HIGH
+// false == LOW
 bool led_1_on = LOW;
 bool led_2_on = LOW;
 bool led_3_on = LOW;
@@ -31,8 +28,6 @@ bool led_9_on = LOW;
 bool led_10_on = LOW;
 
 int vacuumSensorValue; // create a blank variable to hold the value from the Vacuum Sensor Pin that can be assigned a value later
-
-bool inRange(int minimum, int value, int maximum) {return ((value >= minimum) && (value < maximum));} // return a boolean if a value is within a range
 
 void SetAllLEDs(bool state) {
   led_1_on = state;
@@ -64,9 +59,9 @@ void UpdateLEDs() {
 // run this first, once, when the arduino recieves power or the reset button is pressed
 void setup() {
   Serial.begin(9600);
-  delay(delayTime);
+  delay(delay_ms);
   Serial.println("Starting");
-  delay(delayTime);
+  delay(delay_ms);
   Serial.println("Initialising Vacuum Level LEDs");
   pinMode(led_1_pin, OUTPUT);
   pinMode(led_2_pin, OUTPUT);
@@ -78,29 +73,30 @@ void setup() {
   pinMode(led_8_pin, OUTPUT);
   pinMode(led_9_pin, OUTPUT);
   pinMode(led_10_pin, OUTPUT);
-  delay(delayTime);
+  delay(delay_ms);
   SetAllLEDs(HIGH);
-  delay(delayTime);
+  delay(delay_ms);
   SetAllLEDs(LOW);
-  delay(delayTime);
+  delay(delay_ms);
   Serial.println("Initialising Vacuum Sensor Input");
   pinMode(vacuumSensorPin, INPUT);
-  delay(delayTime);
+  delay(delay_ms);
 }
 
 void loop() {
   vacuumSensorValue = analogRead(vacuumSensorPin);
-  if (debugOutput == true) {Serial.println(vacuumSensorValue);}
+  Serial.println(vacuumSensorValue);
+  SetAllLEDs(LOW);
+  if (vacuumSensorValue > 920) {led_10_on = true;}
+  if (vacuumSensorValue > 840) {led_9_on = true;}
+  if (vacuumSensorValue > 760) {led_8_on = true;}
+  if (vacuumSensorValue > 680) {led_7_on = true;}
+  if (vacuumSensorValue > 600) {led_6_on = true;}
+  if (vacuumSensorValue > 520) {led_5_on = true;}
+  if (vacuumSensorValue > 440) {led_4_on = true;}
+  if (vacuumSensorValue > 360) {led_3_on = true;}
+  if (vacuumSensorValue > 250) {led_2_on = true;}
   led_1_on = true;
-  if (inRange(280, vacuumSensorValue, 360))  {led_2_on = true;}
-  if (inRange(360, vacuumSensorValue, 440))  {led_3_on = true;}
-  if (inRange(440, vacuumSensorValue, 520))  {led_4_on = true;}
-  if (inRange(520, vacuumSensorValue, 600))  {led_5_on = true;}
-  if (inRange(600, vacuumSensorValue, 680))  {led_6_on = true;}
-  if (inRange(680, vacuumSensorValue, 760))  {led_7_on = true;}
-  if (inRange(760, vacuumSensorValue, 840))  {led_8_on = true;}
-  if (inRange(840, vacuumSensorValue, 920))  {led_9_on = true;}
-  if (inRange(920, vacuumSensorValue, 1023)) {led_10_on = true;}
   UpdateLEDs();
-  delay(100);
+  delay(300);
 }
