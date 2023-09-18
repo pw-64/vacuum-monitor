@@ -95,7 +95,7 @@ void loop() {
   if (vacuumSensorValue > 520) {led_5_on = true;}
   if (vacuumSensorValue > 440) {led_4_on = true;}
   if (vacuumSensorValue > 360) {led_3_on = true;}
-  if (vacuumSensorValue > 250) {led_2_on = true;}
+  if (vacuumSensorValue > 290) {led_2_on = true;}
   led_1_on = true;
   UpdateLEDs();
   delay(300);
